@@ -7,7 +7,12 @@ dotenv.config();
 
 const app = express();
 
-app.get("/", (req, res) => { res.json({ message: ":)" }); });
 
-app.listen(process.env.PORT, () => 
-console.log(`Server started on port ${process.env.PORT}`));
+app.listen(process.env.PORT, () => {
+mongoose.connect(process.env.MONGO_URI,{
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+     })
+     .then(() => console.log("Connected to MongoDB"))
+     .catch((err) => console.log(err));
+});
